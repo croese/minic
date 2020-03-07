@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "scanner.h"
+#include "debug.h"
+
 // static char* readFile(const char* path) {
 //   FILE* file = fopen(path, "rb");
 //   if (file == NULL) {
@@ -30,8 +33,22 @@
 //   return buffer;
 // }
 
+static void repl() {
+  char line[1024];
+  for (;;) {
+    printf("> ");
+
+    if (!fgets(line, sizeof(line), stdin)) {
+      printf("\n");
+      break;
+    }
+
+    printTokens(line);
+  }
+}
+
 int main(int argc, const char* argv[]) {
-  printf("hello world\n");
+  repl();
 
   return 0;
 }
